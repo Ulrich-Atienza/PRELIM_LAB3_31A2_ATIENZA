@@ -1,0 +1,58 @@
+﻿@model List<Inherit_InterFace.Models.Customer>
+
+<style>
+    .infobox {
+        border: 1px solid #a2a9b1;
+        background-color: #f8f9fa;
+        padding: 10px;
+        margin: 15px 0;
+        width: 300px;
+        font-size: 14px;
+        line-height: 1.4em;
+    }
+
+    .infobox-title {
+        background-color: #cedff2;
+        font-weight: bold;
+        padding: 6px;
+        text-align: center;
+        font-size: 16px;
+        border-bottom: 1px solid #a2a9b1;
+    }
+
+    .infobox-row {
+        padding: 4px 0;
+    }
+
+    .infobox-label {
+        font-weight: bold;
+    }
+</style>
+
+@foreach (var customer in Model)
+{
+    var isVip = customer is Inherit_InterFace.Models.VipCustomer;
+    <div class="infobox">
+        <div class="infobox-title">
+            @(isVip ? "VIP Customer" : "Customer")
+        </div>
+        <div class="infobox-row">
+            <span class="infobox-label">ID:</span> @customer.CustomerId
+        </div>
+        <div class="infobox-row">
+            <span class="infobox-label">Full Name:</span> @customer.GetFullName()
+        </div>
+        <div class="infobox-row">
+            <span class="infobox-label">Birthday:</span> @customer.Birthday.ToString("MMMM d, yyyy")
+        </div>
+        <div class="infobox-row">
+            <span class="infobox-label">Age:</span> @customer.GetAge()
+        </div>
+        @if (isVip)
+        {
+            <div class="infobox-row">
+                <span class="infobox-label">Status:</span> Exclusive Benefits
+            </div>
+        }
+    </div>
+}
